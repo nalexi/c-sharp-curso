@@ -1,0 +1,22 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Editar</title>
+</head>
+<body>
+    <form action="/inscricao/update/@ViewBag.Inscricao.Id" method="post">
+        
+        <label for="campo-nome">Nome</label>
+        <input type="text" id="campo-nome" name="nome" value="@ViewBag.Inscricao.Nome"/>
+
+        <input type="submit" value="Editar"/>
+    </form>
+</body>
+</html>

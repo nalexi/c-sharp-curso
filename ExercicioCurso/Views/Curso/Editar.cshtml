@@ -1,0 +1,85 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Editar</title>
+</head>
+<body>
+    <form action="/curso/update/@ViewBag.Curso.Id" method="post">
+
+        <div>
+            <label for="campo-tema">Tema</label>
+        </div>
+        <input type="text" id="campo-tema" name="curso.Tema" value="@ViewBag.Curso.Tema" />
+        <div>
+            <label for="campo-inscritos">Quantidade Inscritos</label>
+        </div>
+        <div>
+            <input type="number" id="campo-inscritos" name="curso.Inscritos" value="@ViewBag.Curso.Inscritos" />
+        </div>
+        <div>
+            <label for="campo-datacurso">Data do Curso</label>
+        </div>
+        <div>
+            <input type="datetime" id="campo-datacurso" name="curso.DataCurso" />
+        </div>
+        <div>
+            <label>Confirmado</label>
+            @if (ViewBag.Curso.Confirmado)
+            {
+                <input type="radio" name="curso.Confirmado" value="0" />
+                <label>Não</label>
+                <input type="radio" name="curso.Confirmado" value="1" checked="checked" />
+                <label>Sim</label>
+            }
+            else
+            {
+                <input type="radio" name="curso.Confirmado" value="0" checked="checked" />
+                <label>Não</label>
+                <input type="radio" name="curso.Confirmado" value="1" />
+                <label>Sim</label>
+            }
+        </div>
+        <div>
+            <select id="campo-estado" name="curso.Estado">
+                <option disabled="disabled" selected="selected">Selecione Estado</option>
+                @foreach (ExercicioCurso.Controllers.Estado estado in ViewBag.Estados)
+                {
+                    if (ViewBag.Curso.Estado == estado.Codigo)
+                    {
+                        <option value="@estado.Codigo" selected="selected">@estado.Nome</option>
+                    }
+                    else
+                    {
+                        <option value="@estado.Codigo">@estado.Nome</option>
+                    }
+                }
+            </select>
+        </div>
+        <div>
+            <label for="campo-cidade">Cidade</label>
+        </div>
+        <div>
+            <input type="text" id="campo-cidade" name="curso.Cidade" />
+        </div>
+        <div>
+            <label for="campo-bairro">Bairro</label>
+        </div>
+        <div>
+            <input type="text" id="campo-bairro" name="curso.Bairro" />
+        </div>
+        <div>
+            <label for="campo-valor">Valor</label>
+        </div>
+        <input type="number" id="campo-valor" name="curso.Valor" />
+
+        <input type="submit" value="Editar" />
+    </form>
+</body>
+</html>

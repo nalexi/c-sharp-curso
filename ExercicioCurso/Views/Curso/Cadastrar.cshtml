@@ -1,0 +1,92 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastrar</title>
+</head>
+<body>
+    <form action="/curso/store" method="post">
+        <div>
+            <label for="campo-tema">Tema</label>
+        </div>
+        <input type="text" id="campo-tema" name="curso.Tema" />
+        <div>
+            <label for="campo-inscritos">Quantidade Inscritos</label>
+        </div>
+        <div>
+            <input type="number" id="campo-inscritos" name="curso.Inscritos" />
+        </div>
+        <div>
+            <label for="campo-datacurso">Data do Curso</label>
+        </div>
+        <div>
+            <input type="datetime" id="campo-datacurso" name="curso.DataCurso" />
+        </div>
+        <div>
+            <label>Confirmado</label>
+            <label>Sim</label>
+            <input type="radio" name="curso.Confirmado" value="true" />
+            <label>Não</label>
+            <input type="radio" name="curso.Confirmado" value="false" />
+        </div>
+        <div>
+            <select id="campo-estado" name="curso.Estado">
+                <option disabled="disabled" selected="selected">Selecione Estado</option>
+                <option value="0">Acre</option>
+                <option value="1">Alagoas (AL)</option>
+                <option value="2">Amapá (AP)</option>
+                <option value="3">Amazonas (AM)</option>
+                <option value="4">Bahia (BA)</option>
+                <option value="5">Ceará (CE)</option>
+                <option value="6">Distrito Federal (DF)</option>
+                <option value="7">Espírito Santo (ES)</option>
+                <option value="8">Goiás (GO)</option>
+                <option value="9">Maranhão (MA)</option>
+                <option value="10">Mato Grosso (MT)</option>
+                <option value="11">Mato Grosso do Sul (MS)</option>
+                <option value="12">Minas Gerais (MG)</option>
+                <option value="13">Pará (PA)</option>
+                <option value="14">Paraíba (PB)</option>
+                <option value="15">Paraná (PR)</option>
+                <option value="16">Pernambuco (PE)</option>
+                <option value="17">Piauí (PI)</option>
+                <option value="18">Rio de Janeiro (RJ)</option>
+                <option value="19">Rio Grande do Norte (RN)</option>
+                <option value="20">Rio Grande do Sul (RS)</option>
+                <option value="21">Rondônia (RO)</option>
+                <option value="22">Roraima (RR)</option>
+                <option value="23">Santa Catarina (SC)</option>
+                <option value="24">São Paulo (SP)</option>
+                <option value="25">Sergipe (SE)</option>
+                <option value="26">Tocantins (TO)</option>
+            </select>
+        </div>
+        <div>
+            <label for="campo-cidade">Cidade</label>
+        </div>
+        <div>
+            <input type="text" id="campo-cidade" name="curso.Cidade" />
+        </div>
+        <div>
+            <label for="campo-bairro">Bairro</label>
+        </div>
+        <div>
+            <input type="text" id="campo-bairro" name="curso.Bairro" />
+        </div>
+        <div>
+            <label for="campo-valor">Valor</label>
+        </div>
+        <input type="number" id="campo-valor" name="curso.Valor" />
+        <div>
+            <input type="submit" value="Submeter Curso" />
+        </div>
+
+    </form>
+</body>
+</html>

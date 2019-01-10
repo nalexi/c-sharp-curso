@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h3>Inscrições</h3>
+        <a href="/inscricao/cadastrar">Nova Inscricao</a>
+        <form action="/inscricao/index" method="get">
+            <input type="text" name="busca" value="@Request.QueryString["busca"]" autofocus />
+            <input type="submit" value="Busca Inscrito" />
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th class="coluna-codigo">Codigo</th>
+                    <th class="coluna-nome">Nome</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ExercicioCurso.Models.Inscricao inscricao in ViewBag.Inscricoes)
+                {
+                <tr>
+                    <td>@inscricao.Id</td>
+                    <td>@inscricao.Nome</td>
+                    <td>
+                        <a href="/inscricao/editar/@inscricao.Id">Editar</a>
+                        <a href="/inscricao/delete/@inscricao.Id">Apagar</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th class="coluna-codigo">Codigo</th>
+                    <th class="coluna-nome">Nome</th>
+                    <th>Ação</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>

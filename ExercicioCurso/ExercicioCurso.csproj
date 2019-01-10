@@ -100,10 +100,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\DatabaseExercicioCurso_log.ldf">
+      <DependentUpon>DatabaseExercicioCurso.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Database\DatabaseExercicioCurso.mdf" />
+    <Content Include="App_Data\DatabaseExercicioCurso.mdf" />
     <Content Include="Database\Estrutura.sql" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -133,6 +136,7 @@
     <Compile Include="Controllers\CursoController.cs" />
     <Compile Include="Controllers\ExemploDictionary.cs" />
     <Compile Include="Controllers\InscricaoController.cs" />
+    <Compile Include="Database\Conexao.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -140,13 +144,16 @@
     <Compile Include="Interfaces\ICursoRepositorio.cs" />
     <Compile Include="Interfaces\IInscricaoRepositorio.cs" />
     <Compile Include="Interfaces\IPessoaRepositorio.cs" />
+    <Compile Include="Interfaces\IRepositorio.cs" />
     <Compile Include="Models\Curso.cs" />
     <Compile Include="Models\Inscricao.cs" />
     <Compile Include="Models\Pessoa.cs" />
+    <Compile Include="Models\Turma.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CursoRepositorio.cs" />
     <Compile Include="Repositories\InscricaoRepositorio.cs" />
     <Compile Include="Repositories\PessoaRepositorio.cs" />
+    <Compile Include="Repositories\TurmaRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -166,7 +173,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\Inscricoes\" />
   </ItemGroup>
   <PropertyGroup>

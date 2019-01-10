@@ -11,8 +11,8 @@
     <title>Editar</title>
 </head>
 <body>
-    <form action="/curso/update/@ViewBag.Curso.Id" method="post">
-
+    <form action="/curso/update" method="post">
+        <input type="hidden" name="curso.Id" value="@ViewBag.Curso.Id" />
         <div>
             <label for="campo-tema">Tema</label>
         </div>

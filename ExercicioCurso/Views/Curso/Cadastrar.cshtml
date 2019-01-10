@@ -9,84 +9,88 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Cadastrar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 <body>
-    <form action="/curso/store" method="post">
-        <div>
-            <label for="campo-tema">Tema</label>
-        </div>
-        <input type="text" id="campo-tema" name="curso.Tema" />
-        <div>
-            <label for="campo-inscritos">Quantidade Inscritos</label>
-        </div>
-        <div>
-            <input type="number" id="campo-inscritos" name="curso.Inscritos" />
-        </div>
-        <div>
-            <label for="campo-datacurso">Data do Curso</label>
-        </div>
-        <div>
-            <input type="datetime" id="campo-datacurso" name="curso.DataCurso" />
-        </div>
-        <div>
-            <label>Confirmado</label>
-            <label>Sim</label>
-            <input type="radio" name="curso.Confirmado" value="true" />
-            <label>Não</label>
-            <input type="radio" name="curso.Confirmado" value="false" />
-        </div>
-        <div>
-            <select id="campo-estado" name="curso.Estado">
-                <option disabled="disabled" selected="selected">Selecione Estado</option>
-                <option value="0">Acre</option>
-                <option value="1">Alagoas (AL)</option>
-                <option value="2">Amapá (AP)</option>
-                <option value="3">Amazonas (AM)</option>
-                <option value="4">Bahia (BA)</option>
-                <option value="5">Ceará (CE)</option>
-                <option value="6">Distrito Federal (DF)</option>
-                <option value="7">Espírito Santo (ES)</option>
-                <option value="8">Goiás (GO)</option>
-                <option value="9">Maranhão (MA)</option>
-                <option value="10">Mato Grosso (MT)</option>
-                <option value="11">Mato Grosso do Sul (MS)</option>
-                <option value="12">Minas Gerais (MG)</option>
-                <option value="13">Pará (PA)</option>
-                <option value="14">Paraíba (PB)</option>
-                <option value="15">Paraná (PR)</option>
-                <option value="16">Pernambuco (PE)</option>
-                <option value="17">Piauí (PI)</option>
-                <option value="18">Rio de Janeiro (RJ)</option>
-                <option value="19">Rio Grande do Norte (RN)</option>
-                <option value="20">Rio Grande do Sul (RS)</option>
-                <option value="21">Rondônia (RO)</option>
-                <option value="22">Roraima (RR)</option>
-                <option value="23">Santa Catarina (SC)</option>
-                <option value="24">São Paulo (SP)</option>
-                <option value="25">Sergipe (SE)</option>
-                <option value="26">Tocantins (TO)</option>
-            </select>
-        </div>
-        <div>
-            <label for="campo-cidade">Cidade</label>
-        </div>
-        <div>
-            <input type="text" id="campo-cidade" name="curso.Cidade" />
-        </div>
-        <div>
-            <label for="campo-bairro">Bairro</label>
-        </div>
-        <div>
-            <input type="text" id="campo-bairro" name="curso.Bairro" />
-        </div>
-        <div>
-            <label for="campo-valor">Valor</label>
-        </div>
-        <input type="number" id="campo-valor" name="curso.Valor" />
-        <div>
-            <input type="submit" value="Submeter Curso" />
-        </div>
+    <div class="container-fluid">
+        <form action="/curso/store" method="post">
+            <div class="form-group">
+                <label for="campo-tema">Tema</label>
+                <input class="form-control" type="text" id="campo-tema" name="curso.Tema" required="required"/>
+            </div>
+            <div class="form-group">
+                <label for="campo-inscritos">Quantidade Inscritos</label>
+                <input class="form-control" type="number" id="campo-inscritos" name="curso.Inscritos" required="required" />
+            </div>
+            <div class="form-group">
+                <label for="campo-datacurso">Data do Curso</label>
+                <input class="form-control" type="datetime" id="campo-datacurso" name="curso.DataCurso" required="required" />
+            </div>
+            <span>Confirmado</span>
+            <div class="form-check">
 
-    </form>
+                <input class="form-check-input" id="campo-confirmado-sim" type="radio" name="curso.Confirmado" value="true" />
+                <label class="form-check-label" for="campo-confirmado-sim">Sim</label>
+            </div>
+            <div class="form-check mb-2">
+
+                <input class="form-check-input" type="radio" id="campo-confirmado-nao" name="curso.Confirmado" value="false" />
+                <label class="form-check-label" for="campo-confirmado-nao">Não</label>
+            </div>
+            <div class="form-group">
+                <label for="campo-estado">Estado</label>
+                <select class="form-control" id="campo-estado" name="curso.Estado" required="required">
+                    <option disabled="disabled" selected="selected">Selecione Estado</option>
+                    <option value="0">Acre</option>
+                    <option value="1">Alagoas (AL)</option>
+                    <option value="2">Amapá (AP)</option>
+                    <option value="3">Amazonas (AM)</option>
+                    <option value="4">Bahia (BA)</option>
+                    <option value="5">Ceará (CE)</option>
+                    <option value="6">Distrito Federal (DF)</option>
+                    <option value="7">Espírito Santo (ES)</option>
+                    <option value="8">Goiás (GO)</option>
+                    <option value="9">Maranhão (MA)</option>
+                    <option value="10">Mato Grosso (MT)</option>
+                    <option value="11">Mato Grosso do Sul (MS)</option>
+                    <option value="12">Minas Gerais (MG)</option>
+                    <option value="13">Pará (PA)</option>
+                    <option value="14">Paraíba (PB)</option>
+                    <option value="15">Paraná (PR)</option>
+                    <option value="16">Pernambuco (PE)</option>
+                    <option value="17">Piauí (PI)</option>
+                    <option value="18">Rio de Janeiro (RJ)</option>
+                    <option value="19">Rio Grande do Norte (RN)</option>
+                    <option value="20">Rio Grande do Sul (RS)</option>
+                    <option value="21">Rondônia (RO)</option>
+                    <option value="22">Roraima (RR)</option>
+                    <option value="23">Santa Catarina (SC)</option>
+                    <option value="24">São Paulo (SP)</option>
+                    <option value="25">Sergipe (SE)</option>
+                    <option value="26">Tocantins (TO)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="campo-cidade">Cidade</label>
+                <input class="form-control" type="text" id="campo-cidade" name="curso.Cidade" required="required" />
+            </div>
+            <div class="form-group">
+                <label for="campo-bairro">Bairro</label>
+                <input class="form-control" type="text" id="campo-bairro" name="curso.Bairro"  required="required"/>
+            </div>
+            <div class="form-group">
+                <label for="campo-valor">Valor</label>
+                <input class="form-control" type="number" id="campo-valor" name="curso.Valor"  required="required"/>
+            </div>
+            <div class="float-right mb-4">
+                <button class="btn btn-success" type="submit" value="Submeter Curso"><i class="far fa-save"></i> Salvar</button>
+            </div>
+
+        </form>
+    </div>
 </body>
 </html>

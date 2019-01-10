@@ -1,7 +1,9 @@
-﻿using ExercicioCurso.Interfaces;
+﻿using ExercicioCurso.Database;
+using ExercicioCurso.Interfaces;
 using ExercicioCurso.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -11,16 +13,12 @@ namespace ExercicioCurso.Repositories
 {
     public class CursoRepositorio : ICursoRepositorio
     {
-        private readonly string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\nlasa\source\repos\ExercicioCurso\ExercicioCurso\Database\DatabaseExercicioCurso.mdf;Integrated Security=True;Connect Timeout=30";
+        private SqlCommand comando;
 
         public void Alterar(Curso curso)
         {
-            SqlConnection conexao = new SqlConnection(connectionString);
-            conexao.Open();
-            SqlCommand comando = new SqlCommand();
-            comando.Connection = conexao;
-            comando.CommandText = @"UPDATE INTO cursos SET
-                                    id = @ID,
+            comando = Conexao.ObterConexao();
+            comando.CommandText = @"UPDATE cursos SET
                                     tema = @TEMA,
                                     inscritos = @INSCRITOS,
                                     data_curso = @DATACURSO,
@@ -28,7 +26,7 @@ namespace ExercicioCurso.Repositories
                                     estado = @ESTADO,
                                     cidade = @CIDADE,
                                     bairro = @BAIRRO,
-                                    valor = @VALOR,
+                                    valor = @VALOR
                                     WHERE id = @ID";
 
             comando.Parameters.AddWithValue("@ID", curso.Id);
@@ -42,30 +40,21 @@ namespace ExercicioCurso.Repositories
             comando.Parameters.AddWithValue("@VALOR", curso.Valor);
 
             comando.ExecuteNonQuery();
-            conexao.Close();
+            comando.Connection.Close();
         }
 
         public void Apagar(int id)
         {
-            SqlConnection conexao = new SqlConnection(connectionString);
-            conexao.Open();
-
-            SqlCommand comando = new SqlCommand();
-            comando.Connection = conexao;
+            comando = Conexao.ObterConexao();
             comando.CommandText = @"UPDATE cursos SET registro_ativo = 0 WHERE id = @ID";
             comando.Parameters.AddWithValue("@ID", id);
             comando.ExecuteNonQuery();
-            conexao.Close();
+            comando.Connection.Close();
         }
 
         public int Inserir(Curso curso)
         {
-            SqlConnection conexao = new SqlConnection(connectionString);
-            conexao.Open();
-
-            SqlCommand comando = new SqlCommand();
-            comando.Connection = conexao;
-            
+            comando = Conexao.ObterConexao();            
             comando.CommandText = @"INSERT INTO cursos
                                     (tema, inscritos, data_curso, confirmado, estado, cidade, bairro, valor, registro_ativo)
                                     OUTPUT INSERTED.ID
@@ -81,25 +70,22 @@ namespace ExercicioCurso.Repositories
             comando.Parameters.AddWithValue("@VALOR", curso.Valor);
 
             int id = Convert.ToInt32(comando.ExecuteScalar().ToString());
-            conexao.Close();
+            comando.Connection.Close();
             return id;
         }
 
         public Curso ObterPeloId(int id)
         {
-            SqlConnection conexao = new SqlConnection(connectionString);
-            conexao.Open();
-
-            SqlCommand comando = new SqlCommand();
-            comando.Connection = conexao;
+            comando = Conexao.ObterConexao();
             comando.CommandText = @"SELECT * FROM cursos WHERE id=@ID AND registro_ativo = 1";
             comando.Parameters.AddWithValue("@ID", id);
             DataTable table = new DataTable();
             table.Load(comando.ExecuteReader());
 
+            Curso curso = null;
             if (table.Rows.Count == 1)
             {
-                Curso curso = new Curso();
+                curso = new Curso();
                 DataRow row = table.Rows[0];
                 curso.Id = Convert.ToInt32(row["id"].ToString());
                 curso.Tema = row["tema"].ToString();
@@ -110,19 +96,15 @@ namespace ExercicioCurso.Repositories
                 curso.Cidade = row["cidade"].ToString();
                 curso.Bairro = row["bairro"].ToString();
                 curso.Valor = Convert.ToDecimal(row["valor"].ToString());
-                return curso;
             }
-            return null;
+            comando.Connection.Close();
+            return curso == null ? curso : null;
 
         }
 
         public List<Curso> ObterTodos(string busca)
         {
-            SqlConnection conexao = new SqlConnection(connectionString);
-            conexao.Open();
-
-            SqlCommand comando = new SqlCommand();
-            comando.Connection = conexao;
+            comando = Conexao.ObterConexao();
             comando.CommandText = @"SELECT * FROM cursos WHERE registro_ativo = 1 AND tema LIKE @BUSCA ORDER BY tema";
             busca = "%" + busca + "%";
             comando.Parameters.AddWithValue("@BUSCA", busca);
@@ -144,6 +126,7 @@ namespace ExercicioCurso.Repositories
                 curso.Valor = Convert.ToDecimal(row["valor"].ToString());
                 cursos.Add(curso);
             }
+            comando.Connection.Close();
             return cursos;
         }
     }
